@@ -128,3 +128,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 data/* data-raw/*
+data-scratch/sitemap.xml data-scratch/text.xml
