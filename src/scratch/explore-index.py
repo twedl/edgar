@@ -7,6 +7,9 @@ import lxml.etree as et
 from urllib.request import urlopen, Request
 import logging
 
+import xmltodict, json
+from bs4 import BeautifulSoup
+
 edgar_index_re = re.compile(r"^http://www.sec.gov/(?:Archives|[Ii]ndexes.sec.gov)/edgar/(?P<schedule>full|daily)-index/(?P<year>[0-9]{4})/QTR(?P<qtr>[1-4])/sitemap\.(?P<name>.*\.xml)$")
 
 def download_file(url, fname, force_update = False):
@@ -73,7 +76,43 @@ def main():
             logging.warning(f"Corrupt record: {url_info}")
         index.append(current_elem)
     
-    print(index[:2])
+    # print(index[:2])
+
+    # url = "https://www.sec.gov/Archives/edgar/daily-index/2017/QTR3/sitemap.20170803.xml"
+    # fn = "data-scratch/sitemap.20170803.xml"
+    # download_file(url, fn)
+
+    # with open(xml_fname, mode = 'rb') as f:
+    #     with gzip.open(f, mode = 'rb') as zip_ref:
+    #         text = zip_ref.read()
+    # print(text)
+    
+    # url = "http://www.sec.gov/Archives/edgar/data/1709660/9999999995-17-002008-index.htm"
+    # ugh, that's a link to a html page that links the txt file
+    # text file here:
+    url = "https://www.sec.gov/Archives/edgar/data/1709660/999999999517002008/9999999995-17-002008.txt"
+    fn = "data-scratch/9999999995-17-002008-index.txt.gz"
+    download_file(url, fn)
+
+    with open(fn, mode = 'rb') as f:
+        with gzip.open(f, mode = 'rt') as zip_ref:
+            text = zip_ref.read()
+    # print(text) # but this isn't really xml; xml-ish
+
+
+
+    # doc = xmltodict.parse(text)
+    # print(json.dumps(doc))
+
+    doc = BeautifulSoup(text, "lxml-xml")
+    print(doc.prettify())
+
+    # tree = et.ElementTree(et.fromstring(text))
+    # print(str(tree))
+
+    # tree = et.ElementTree(et.fromstring(text))
+    # root = tree.getroot() 
+
     # alright, sick, amazing, now what
     # now look at an index itself?
 
