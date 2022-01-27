@@ -127,5 +127,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-data/* data-raw/*
-data-scratch/sitemap.xml data-scratch/text.xml
+
+# data files to ignore for this project
+data/* 
+data-raw/*
+data-scratch/*
