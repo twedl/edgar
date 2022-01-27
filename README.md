@@ -5,7 +5,11 @@ This project ingests, cleans, and organizes securities filings provided by the S
 Related resources:
 
 * [EDGAR Application Programming Interfaces](https://www.sec.gov/edgar/sec-api-documentation): SEC API that offers direct access to a specific company's information
-* [submission zip file](https://www.sec.gov/Archives/edgar/daily-index/bulkdata/submissions.zip): contains the public EDGAR filing history for all filers--that contains the filing info (e.g., form name and date), but not the filing itself.
+* [submission zip file](https://www.sec.gov/Archives/edgar/daily-index/bulkdata/submissions.zip): contains the public EDGAR filing history for all filers--contains the filing info (e.g., form name and date), but not the filing itself.
+* Company ticket / CIK / company name crosswalks (from the [Developers FAQ](https://www.sec.gov/os/webmaster-faq#developers): 
+    - [ticket.txt](https://www.sec.gov/include/ticker.txt) tab delimited text file for ticker/CIK
+    - [company_tickers.json](https://www.sec.gov/files/company_tickers.json): json file for ticker/CIK/name 
+* [Financial Statement Data Sets](https://www.sec.gov/dera/data/financial-statement-data-sets.html): numeric information from the "face" (?) financials of all financial statements. There's also the [Financial Statement and Notes Data Sets](https://www.sec.gov/dera/data/financial-statement-and-notes-data-set.html), which has more info.
 
 # Output
 
