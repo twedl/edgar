@@ -99,8 +99,10 @@ def main():
             text = zip_ref.read()
     # print(text) # but this isn't really xml; xml-ish
 
+    # url = "https://www.sec.gov/Archives/edgar/Feed/2017/QTR1/"
+    url = "https://www.sec.gov/Archives/edgar/Feed/index.json"
 
-
+   
     # doc = xmltodict.parse(text)
     # print(json.dumps(doc))
 
