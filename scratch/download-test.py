@@ -1,4 +1,8 @@
 # python script to see test how to download the financial documents
+import lxml.etree as et
+
+# worry about schema ehre?
+
 
 # first, get a url
 
