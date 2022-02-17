@@ -12,10 +12,12 @@ Related resources:
 * [Financial Statement Data Sets](https://www.sec.gov/dera/data/financial-statement-data-sets.html): numeric information from the "face" (?) financials of all financial statements. There's also the [Financial Statement and Notes Data Sets](https://www.sec.gov/dera/data/financial-statement-and-notes-data-set.html), which has more info.
 * [EDGAR Public Dissemination Subsystem Technical Specification](https://www.sec.gov/info/edgar/specifications/pds_dissemination_spec.pdf): provides file specifications for parsing the EDGAR submissions
 
+
 Similar projects:
 
 * [OpenEDGAR](https://github.com/LexPredict/openedgar): 
 * [sec-data-parser](https://github.com/paulgb/sec-data-parser): a Rust parser for EDGAR SGML files
+* [sec-edgar-tools](https://github.com/altova/sec-edgar-tools): some related tools
 
 # Output
 
