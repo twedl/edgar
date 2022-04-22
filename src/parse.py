@@ -1,9 +1,7 @@
 import pandas as pd
 import re
 import json
-import logging
 
-tag_re = re.compile(r"^(?P<tag><.*>)?(?P<content>.*)?$")
 
 def get_tags(fname):
     dtypes = {
@@ -20,6 +18,9 @@ def get_tags(fname):
     return tags[["tag", "end_tag"]]
 
 def parse(fname):
+
+    tag_re = re.compile(r"^(?P<tag><.*>)?(?P<content>.*)?$")
+
     # parse text or parse filename?
     with open(fname, mode = "rt") as f:
         text = f.read()
@@ -101,19 +102,33 @@ def parse(fname):
                     current_element.append(line)
 
     # before writing, add filename = "999...253.nc" to object at top-level
-    print(json.dumps(nc_doc, sort_keys = False, indent = 4))
+    # print(json.dumps(nc_doc, sort_keys = False, indent = 4))
+    return nc_doc #json.dumps(nc_doc)
 
     
 def main():
 
+    # this is to test them i suppose
+
     # later, use gzip file instead
     # with open("src/pyncparser/test/data/9999999997-22-000253.nc", mode = "rt") as f:
     #     text = f.read()
-    fname = "src/pyncparser/test/data/test-multiple-documents.nc"
-    
 
-    parse(fname)
+    # fname = "src/pyncparser/test/data/test-multiple-documents.nc"
+    # fname = "tests/data/9999999997-22-000180.nc" # text is really encoded pdf
+    fname = "tests/data/9999999997-22-000253.nc"
+
+    res = parse(fname)
+    print(json.dumps(res, sort_keys = False, indent = 4))
+    # print(json.dumps(res, separators=(',', ':')))
 
 if __name__ == "__main__":
     main()
+
+
+
+    # stick to rdbms; sql things; just redshift maybe, with long text or text or whatever it takes;
+    # do the data modelling for some specific purpose
+    # then think later about using search/json/mongodb/ etc., and if i oculd do cansim as well
+    #
 
