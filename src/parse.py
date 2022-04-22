@@ -1,8 +1,9 @@
 import pandas as pd
 import re
 import json
+import logging
 
-TAG_RE = re.compile(r"^(?P<tag><.*>)?(?P<content>.*)?$")
+tag_re = re.compile(r"^(?P<tag><.*>)?(?P<content>.*)?$")
 
 def get_tags(fname):
     dtypes = {
@@ -39,7 +40,7 @@ def parse(fname):
 
     # wow this is pretty ugly
     for line in text:
-        line_result = TAG_RE.search(line).groupdict()
+        line_result = tag_re.search(line).groupdict()
 
         current_tag = line_result["tag"]
 
@@ -101,3 +102,18 @@ def parse(fname):
 
     # before writing, add filename = "999...253.nc" to object at top-level
     print(json.dumps(nc_doc, sort_keys = False, indent = 4))
+
+    
+def main():
+
+    # later, use gzip file instead
+    # with open("src/pyncparser/test/data/9999999997-22-000253.nc", mode = "rt") as f:
+    #     text = f.read()
+    fname = "src/pyncparser/test/data/test-multiple-documents.nc"
+    
+
+    parse(fname)
+
+if __name__ == "__main__":
+    main()
+
