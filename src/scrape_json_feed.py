@@ -88,7 +88,26 @@ def open_nc_archive(fname, dir_name):
     """
     with tarfile.open(fname, mode = 'r:gz') as tar_ref:
         dir_name.mkdir(parents = True, exist_ok = True)
-        tar_ref.extractall(path = dir_name)
+        def is_within_directory(directory, target):
+            
+            abs_directory = os.path.abspath(directory)
+            abs_target = os.path.abspath(target)
+        
+            prefix = os.path.commonprefix([abs_directory, abs_target])
+            
+            return prefix == abs_directory
+        
+        def safe_extract(tar, path=".", members=None, *, numeric_owner=False):
+        
+            for member in tar.getmembers():
+                member_path = os.path.join(path, member.name)
+                if not is_within_directory(path, member_path):
+                    raise Exception("Attempted Path Traversal in Tar File")
+        
+            tar.extractall(path, members, numeric_owner=numeric_owner) 
+            
+        
+        safe_extract(tar_ref, path=dir_name)
 
 def re_zip_archive(dir_name):
     """
